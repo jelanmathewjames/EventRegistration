@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from home.models import RegistrationForm
+from home.models import RegistrationForm, EventScheduler
 
 # Create your views here.
 def home(request):
-    return render(request,'home.html')
+    schedule = EventScheduler.objects.filter(event_name='online_coding_envent').exist() 
+    data = schedule.event_data_time
+    return render(request,'home.html',{'data':data})
 
 def register(request):
     if request.method == 'POST':
