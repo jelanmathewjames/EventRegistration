@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth, User
 from django.http import JsonResponse
-from home.models import RegistrationForm
+from home.models import RegistrationForm, EventScheduler
 # Create your views here.
 def admin_login(request):
     if 'admin_login' not in request.session:
@@ -45,3 +45,6 @@ def admin_logout(request):
         return redirect('/admin/')
     except KeyError:
         return redirect('/admin/')
+
+def admin_reschedule(request):
+    pass
