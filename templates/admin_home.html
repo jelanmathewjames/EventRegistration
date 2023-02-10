@@ -24,8 +24,12 @@
                     <a class="nav-link"><button id="logout" class="btn btn-outline-primary">Logout</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"><button id="logout" class="btn btn-outline-primary">Reschedule Event</button></a>
-                </li>
+                    <form>
+                    {% csrf_token ℅}
+                    <a class="nav-link"><button id="reschedule" class="btn btn-outline-primary">Reschedule Event</button></a>
+                    <input type="text" class="form-control" id="datetime" placeholder="Enter date time eg:09/19/22 13:55:26">
+                    </form>
+                 </li>
               </ul>
             </div>
         </nav>
@@ -82,5 +86,24 @@
     $('#logout').click(()=>{
         window.location.replace('/admin/admin_logout')
     })
+    $('#reschedule).click(()=>{
+        var datetime = $('#datetime).val() 
+        if(datetime == ''){
+            alert("Date time field cannot be empty") 
+        }else{
+            method:'POST', 
+            url:'/admin/admin_reschedule/', 
+            data:{
+                'csrfmiddlewaretoken':'{{csrf_token}}', 
+                'datetime':datetime
+            }, 
+            dataType:'json', 
+            success:(data)=>{
+                if(data.success=='true'){
+                    alert("updated event schedule") 
+                }
+            }
+        }
+    }) 
 </script>
 </html>
