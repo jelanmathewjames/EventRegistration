@@ -38,3 +38,10 @@ def admin_home(request):
         return render(request,'admin_home.html',{'data':data})
     else:
         return redirect('/admin/')
+
+def admin_logout(request):
+    try:
+        del request.session['admin_login']
+        return redirect('/admin/')
+    except KeyError:
+        return redirect('/admin/')
