@@ -47,4 +47,11 @@ def admin_logout(request):
         return redirect('/admin/')
 
 def admin_reschedule(request):
-    pass
+    if request.method == 'POST':
+        datetime = request.POST['datetime']
+        schedule=EventScheduler.object.filter(event_name='online_coding_event').update(event_data_time=datetime) 
+        schedule.save() 
+        return JsonResponse(
+            {'success':'true'},
+            safe=False
+        ) 
