@@ -49,8 +49,7 @@ def admin_logout(request):
 def admin_reschedule(request):
     if request.method == 'POST':
         datetime = request.POST['datetime']
-        schedule=EventScheduler.object.filter(event_name='online_coding_event').update(event_data_time=datetime) 
-        schedule.save() 
+        EventScheduler.objects.filter(event_name='online_coding_event').update(event_data_time=datetime)
         return JsonResponse(
             {'success':'true'},
             safe=False

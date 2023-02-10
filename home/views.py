@@ -4,7 +4,7 @@ from home.models import RegistrationForm, EventScheduler
 
 # Create your views here.
 def home(request):
-    schedule = EventScheduler.objects.filter(event_name='online_coding_envent').exist() 
+    schedule = EventScheduler.objects.filter(event_name='online_coding_event').first() 
     data = schedule.event_data_time
     return render(request,'home.html',{'data':data})
 
@@ -16,7 +16,7 @@ def register(request):
         education_status = request.POST['education_status']
         institution = request.POST['institution']
         check_email = RegistrationForm.objects.filter(email=email).exists()
-        check_phone_number = RegistrationForm.objects.filter(phone_number=phone_number).exists()
+        check_phone_number = RegistrationForm.objects.filter(phone_number=phone_number).exist()
         if check_email:
             return JsonResponse(
                 {'success':'email_exist'},
