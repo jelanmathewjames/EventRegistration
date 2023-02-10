@@ -16,7 +16,7 @@ def register(request):
         education_status = request.POST['education_status']
         institution = request.POST['institution']
         check_email = RegistrationForm.objects.filter(email=email).exists()
-        check_phone_number = RegistrationForm.objects.filter(phone_number=phone_number).exist()
+        check_phone_number = RegistrationForm.objects.filter(phone_number=phone_number).exists()
         if check_email:
             return JsonResponse(
                 {'success':'email_exist'},
